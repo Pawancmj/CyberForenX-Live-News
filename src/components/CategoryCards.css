@@ -1,0 +1,60 @@
+/* ===== Container ===== */
+.categories {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 25px;
+  padding: 50px 20px;
+  background-color: #ffffff;
+  text-align: center;
+}
+
+/* ===== Each Card ===== */
+.card {
+  background: linear-gradient(135deg, #1d3557, #457b9d);
+  color: #fff;
+  border-radius: 12px;
+  padding: 30px 20px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+  cursor: pointer;
+}
+
+/* ===== Category Title ===== */
+.card h3 {
+  margin-bottom: 10px;
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+/* ===== Description ===== */
+.card p {
+  font-size: 0.95rem;
+  opacity: 0.9;
+}
+
+/* ===== Hover Effect ===== */
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+  background: linear-gradient(135deg, #457b9d, #1d3557);
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  .categories {
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  }
+
+  .card {
+    padding: 20px 10px;
+  }
+
+  .card h3 {
+    font-size: 1.1rem;
+  }
+
+  .card p {
+    font-size: 0.85rem;
+  }
+}
