@@ -14,8 +14,9 @@ function BreakingTicker() {
     const timer = setInterval(() => {
       setIndex((prev) => (prev + 1) % news.length);
     }, 3000);
+
     return () => clearInterval(timer);
-  }, []);
+  }, [news.length]); // ✅ Added dependency
 
   return (
     <div className="ticker">
@@ -26,3 +27,4 @@ function BreakingTicker() {
 }
 
 export default BreakingTicker;
+

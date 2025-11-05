@@ -2,13 +2,12 @@
 .featured {
   padding: 50px 20px;
   text-align: center;
-  background-color: #f8f9fa;
-  border-top: 4px solid #1d3557;
+  border-top: 3px solid #e63946;
 }
 
 /* ===== Section Title ===== */
 .featured h2 {
-  color: #1d3557;
+  color: #e63946;
   font-size: 1.8rem;
   margin-bottom: 30px;
   font-weight: 700;

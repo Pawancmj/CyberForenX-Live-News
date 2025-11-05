@@ -1,26 +1,133 @@
-/* ===== Footer Section ===== */
 .footer {
-  background-color: #0d1b2a; /* Dark navy blue (same as navbar) */
-  color: #f8f9fa;
-  text-align: center;
-  padding: 20px 10px;
-  margin-top: 40px;
-  border-top: 2px solid #1d3557;
+  background-color: #111;
+  color: #fff;
+  padding: 50px 20px 20px;
+  font-family: "Poppins", sans-serif;
+  border-top: 2px solid red;
+}
+
+.footer-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 30px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.footer-section {
+  flex: 1;
+  min-width: 250px;
+}
+
+.footer-section h3 {
+  font-size: 1.3rem;
+  margin-bottom: 15px;
+  color: #ff3c00;
+}
+
+.footer-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-section ul li {
+  margin: 8px 0;
+}
+
+.footer-section ul li a {
+  color: #ccc;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-section ul li a:hover {
+  color: #fff;
+}
+
+/* 📨 Newsletter */
+.newsletter p {
+  color: #ccc;
   font-size: 0.95rem;
-  letter-spacing: 0.3px;
+  margin-bottom: 10px;
 }
 
-/* ===== Hover Effect (optional subtle animation) ===== */
-.footer:hover {
-  background-color: #1b263b;
-  transition: background-color 0.4s ease;
+.newsletter form {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
 }
 
-/* ===== Responsive ===== */
+.newsletter input {
+  flex: 1;
+  padding: 10px 12px;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+}
+
+.newsletter button {
+  background-color: #ff3c00;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.newsletter button:hover {
+  background-color: #e13200;
+}
+
+/* 🌐 Social Icons */
+.social-icons {
+  display: flex;
+  gap: 15px;
+  font-size: 1.5rem;
+}
+
+.social-icons a {
+  color: #ccc;
+  transition: color 0.3s ease;
+}
+
+.social-icons a:hover {
+  color: #ff3c00;
+}
+
+/* © Bottom */
+.footer-bottom {
+  text-align: center;
+  border-top: 1px solid #333;
+  margin-top: 30px;
+  padding-top: 15px;
+  font-size: 0.9rem;
+  color: #aaa;
+}
+
+.footer-bottom span {
+  color: #ff3c00;
+}
+
+/* 📱 Responsive */
 @media (max-width: 768px) {
-  .footer {
-    font-size: 0.85rem;
-    padding: 15px;
+  .footer-container {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .newsletter form {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .newsletter input,
+  .newsletter button {
+    width: 100%;
   }
 }
+
 
