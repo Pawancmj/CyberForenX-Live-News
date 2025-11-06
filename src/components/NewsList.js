@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import "./NewsList.css";
 
 const articles = [
@@ -13,11 +14,11 @@ function NewsList() {
   const [filter, setFilter] = useState("All");
   const [sort, setSort] = useState("Latest");
 
-  // 🔍 Filter + Sort Logic
   const filteredArticles = articles
-    .filter((a) =>
-      a.title.toLowerCase().includes(search.toLowerCase()) &&
-      (filter === "All" || a.category === filter)
+    .filter(
+      (a) =>
+        a.title.toLowerCase().includes(search.toLowerCase()) &&
+        (filter === "All" || a.category === filter)
     )
     .sort((a, b) => {
       if (sort === "Latest") return new Date(b.date) - new Date(a.date);
@@ -28,7 +29,7 @@ function NewsList() {
 
   return (
     <div className="news-container">
-      {/* Search + Filters */}
+      {/* 🔍 Search + Filter Bar */}
       <div className="filter-bar">
         <input
           type="text"
@@ -53,16 +54,20 @@ function NewsList() {
         </select>
       </div>
 
-      {/* Article Cards */}
+      {/* 📰 Article Cards */}
       <div className="news-list">
         {filteredArticles.length > 0 ? (
           filteredArticles.map((article) => (
-            <div key={article.id} className="news-card">
+            <Link
+              to={`/article/${article.id}`} // 👈 Navigate to article page
+              key={article.id}
+              className="news-card"
+            >
               <h3>{article.title}</h3>
               <p className="meta">
                 🗓 {article.date} | 📂 {article.category} | 👁 {article.views}
               </p>
-            </div>
+            </Link>
           ))
         ) : (
           <p className="no-results">No articles found...</p>
@@ -73,3 +78,4 @@ function NewsList() {
 }
 
 export default NewsList;
+

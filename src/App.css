@@ -11,8 +11,8 @@
 
 [data-theme="dark"] {
   --bg-color: #0d1117;
-  --text-color: #e6edf3;
-  --navbar-bg: #161b22;
+  --text-color: #c6cdd3;
+  --navbar-bg: #000000;
   --accent-color: #58a6ff;
   --card-bg: #1e2329;
   --card-shadow: rgba(255, 255, 255, 0.05);

@@ -1,0 +1,110 @@
+.article-page {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 20px;
+  transition: all 0.4s ease;
+}
+
+.article-page h1 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+  color: var(--text-color, #000);
+}
+
+.article-meta {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.article-image {
+  width: 100%;
+  border-radius: 12px;
+  margin-bottom: 25px;
+}
+
+.article-content {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: var(--text-color, #000);
+}
+
+.social-share {
+  margin-top: 30px;
+}
+
+.social-share p {
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+.social-share .buttons button {
+  margin: 5px;
+  padding: 8px 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  background: #eaeaea;
+  transition: 0.3s;
+}
+
+.social-share .buttons button:hover {
+  transform: scale(1.05);
+}
+
+.recommended {
+  margin-top: 40px;
+  border-top: 1px solid #ccc;
+  padding-top: 20px;
+}
+
+.recommend-list {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.recommend-card {
+  text-decoration: none;
+  color: inherit;
+  background: #f9f9f9;
+  border-radius: 10px;
+  width: 260px;
+  padding: 10px;
+  transition: all 0.3s ease;
+}
+
+.recommend-card:hover {
+  transform: translateY(-3px);
+}
+
+.recommend-card img {
+  width: 100%;
+  border-radius: 8px;
+}
+
+.recommend-card p {
+  margin-top: 8px;
+  font-weight: 500;
+}
+
+/* 🌙 Dark Mode (follows navbar's theme attribute) */
+[data-theme="dark"] .article-page {
+  background-color: #121212;
+  color: #ffffff;
+}
+
+[data-theme="dark"] .article-page h1,
+[data-theme="dark"] .article-content {
+  color: #ffffff;
+}
+
+[data-theme="dark"] .article-meta {
+  color: #cccccc;
+}
+
+[data-theme="dark"] .recommend-card {
+  background: #1e1e1e;
+}
+
+

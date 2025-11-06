@@ -30,17 +30,20 @@ export default function Navbar() {
   }, []);
 
   const categories = [
-    "National",
-    "International",
-    "Sports",
-    "Technology",
-    "Business",
-    "Health",
-    "Politics",
-    "Entertainment",
-    "Lifestyle",
-    "Environment",
-  ];
+  { name: "National", path: "/national" },
+  { name: "International", path: "/international" },
+  { name: "Politics", path: "/politics" },
+  { name: "Sports", path: "/sports" },
+  { name: "Entertainment", path: "/entertainment" },
+  { name: "Technology", path: "/technology" },
+  { name: "Business", path: "/business" },
+  { name: "Health", path: "/health" },
+  { name: "Environment", path: "/environment" },
+  { name: "Lifestyle", path: "/lifestyle" },
+  
+  
+
+];  
 
   return (
     <nav className="navbar">
@@ -66,11 +69,12 @@ export default function Navbar() {
           </button>
 
           <div className="dropdown-menu" onClick={() => setMenuOpen(false)}>
-            {categories.map((cat, i) => (
-              <a key={i} href={`#${cat.toLowerCase()}`}>
-                {cat}
-              </a>
-            ))}
+             
+             {categories.map((cat, i) => (
+                <Link key={i} to={cat.path} className="dropdown-link">
+                 {cat.name}
+                </Link>
+              ))}
           </div>
         </div>
 

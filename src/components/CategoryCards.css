@@ -2,19 +2,20 @@
   width: 100%;
   overflow: hidden;
   position: relative;
-  background: transparent; /* 🎯 Removed background */
+  background: transparent;
   padding: 40px 0;
 }
 
-/* Slider track */
-.slider-track {
+/* 🔁 Slider track for smooth scroll */
+.slider-track.smooth {
   display: flex;
   transition: transform 1s ease-in-out;
+  will-change: transform;
 }
 
 /* 🧱 Category Cards */
 .card {
-  flex: 0 0 25%; /* ✅ 4 cards per row on desktop */
+  flex: 0 0 25%;
   box-sizing: border-box;
   margin: 0 15px;
   border-radius: 20px;
@@ -28,23 +29,25 @@
   transform-origin: center;
   position: relative;
   overflow: hidden;
+  animation: blueGlow 3s infinite ease-in-out;
+  cursor: pointer;
+  text-decoration: none;
 }
 
-/* 🌟 Subtle Glow Animation */
+/* 🌟 Glow Animation */
 @keyframes blueGlow {
   0% {
-    box-shadow: 0 0 15px rgba(79, 172, 254, 0.5), 0 0 30px rgba(0, 242, 254, 0.3);
+    box-shadow: 0 0 15px rgba(79, 172, 254, 0.5),
+      0 0 30px rgba(0, 242, 254, 0.3);
   }
   50% {
-    box-shadow: 0 0 25px rgba(79, 172, 254, 0.8), 0 0 45px rgba(0, 242, 254, 0.5);
+    box-shadow: 0 0 25px rgba(79, 172, 254, 0.8),
+      0 0 45px rgba(0, 242, 254, 0.5);
   }
   100% {
-    box-shadow: 0 0 15px rgba(79, 172, 254, 0.5), 0 0 30px rgba(0, 242, 254, 0.3);
+    box-shadow: 0 0 15px rgba(79, 172, 254, 0.5),
+      0 0 30px rgba(0, 242, 254, 0.3);
   }
-}
-
-.card {
-  animation: blueGlow 3s infinite ease-in-out;
 }
 
 /* 🕹️ Hover Effects */
@@ -68,7 +71,7 @@
   line-height: 1.5;
 }
 
-/* 🌙 Dark Mode Support */
+/* 🌙 Dark Mode */
 @media (prefers-color-scheme: dark) {
   .card {
     background: linear-gradient(135deg, #1e3c72, #2a5298);
@@ -81,22 +84,55 @@
   }
 }
 
+/* ⬅️➡️ Navigation Buttons */
+.nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(79, 172, 254, 0.8);
+  border: none;
+  color: #fff;
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  z-index: 5;
+}
+
+.nav-btn:hover {
+  background: rgba(0, 242, 254, 0.9);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.nav-btn.left {
+  left: 15px;
+}
+
+.nav-btn.right {
+  right: 15px;
+}
+
 /* 📱 Responsive Layout */
 @media (max-width: 1024px) {
   .card {
-    flex: 0 0 33.33%; /* 3 cards per row */
+    flex: 0 0 33.33%;
   }
 }
 
 @media (max-width: 768px) {
   .card {
-    flex: 0 0 50%; /* 2 cards per row */
+    flex: 0 0 50%;
   }
 }
 
 @media (max-width: 480px) {
   .card {
-    flex: 0 0 100%; /* 1 card per row */
+    flex: 0 0 100%;
   }
 }
+
 

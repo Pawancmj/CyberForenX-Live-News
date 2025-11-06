@@ -7,13 +7,26 @@ import "./App.css";
 import Navbar from "./components/Nav";
 import BreakingTicker from "./components/BreakingTicker";
 import Footer from "./components/Footer";
-import CategoryPage from "./components/CategoryPage";
+
+
 
 // Pages
 import Home from "./Pages/Home";
 import Trending from "./Pages/Trending";
 import About from "./Pages/About";
 import Contact from "./Pages/Contact";
+import Admin from "./Pages/Admin";
+import Article from "./Pages/Article";
+import National from "./Pages/National"
+import Lifestyle from "./Pages/Lifestyle";
+import Environment from "./Pages/Environment";
+import Health from "./Pages/Health";
+import Business from "./Pages/Business";
+import Technology from "./Pages/Technology";
+import Entertainment from "./Pages/Entertainment";
+import Sports from "./Pages/Sports";
+import Politics from "./Pages/Politics";
+import International from "./Pages/International";
 
 function App() {
   const sportsArticles = [
@@ -61,25 +74,31 @@ function App() {
       <div className="app">
         <Navbar />
         <BreakingTicker />
+        
 
         <Routes>
           {/* ===== Homepage ===== */}
           <Route path="/" element={<Home articles={allArticles} />} />
 
-          {/* ===== Category Pages ===== */}
-          <Route
-            path="/sports"
-            element={<CategoryPage title="Sports" articles={sportsArticles} />}
-          />
-          <Route
-            path="/technology"
-            element={<CategoryPage title="Technology" articles={techArticles} />}
-          />
+          
 
           {/* ===== Other Pages ===== */}
           <Route path="/trending" element={<Trending />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/admin" element={<Admin />} />
+          <Route path="/article/:id" element={<Article />} />
+          <Route path="/national" element={<National />} />
+          <Route path="/international" element={<International />} />
+          <Route path="/politics" element={<Politics />} />
+          <Route path="/sports" element={<Sports />} />
+          <Route path="/entertainment" element={<Entertainment />} />
+          <Route path="/technology" element={<Technology />} />
+          <Route path="/business" element={<Business />} />
+          <Route path="/health" element={<Health />} />
+          <Route path="/environment" element={<Environment />} />
+          <Route path="/lifestyle" element={<Lifestyle />} />
+          
         </Routes>
 
         <Footer />

@@ -14,7 +14,7 @@ export default function Trending() {
         <p>
           Stay updated with the hottest stories making waves across the world.
         </p>
-        {/* Yahan tu chahe toh Trending News Cards add kar sakta hai */}
+        {/*  Trending News Cards add kar sakte hai */}
       </div>
 
       
