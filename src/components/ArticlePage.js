@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./ArticlePage.css";
 import { useParams, Link } from "react-router-dom";
 
@@ -25,22 +25,62 @@ const dummyArticles = [
     image: "https://source.unsplash.com/1200x600/?cricket,stadium",
     content: `In an exciting match between India and Australia, fans witnessed an incredible performance by both teams. The highlights include record-breaking innings and stunning fielding efforts that made this game one to remember.`,
   },
-   {
+  {
     id: 4,
     title: "Stock Market Sees Record Growth",
-    category: "Sports",
+    category: "Business",
     date: "2025-10-29",
     views: 9000,
     author: "Druti Ghag",
     source: "TOI",
-    image: "https://source.unsplash.com/1200x600/?cricket,stadium",
-    content: `In an exciting match between India and Australia, fans witnessed an incredible performance by both teams. The highlights include record-breaking innings and stunning fielding efforts that made this game one to remember.`,
+    image: "https://source.unsplash.com/1200x600/?stock,market",
+    content: `The stock market hit record highs this week due to strong earnings reports and renewed investor confidence.`,
   },
 ];
 
 export default function ArticlePage() {
   const { id } = useParams();
   const article = dummyArticles.find((a) => a.id === Number(id));
+  const [liked, setLiked] = useState(false);
+  const [bookmarked, setBookmarked] = useState(false);
+  const user = JSON.parse(localStorage.getItem("user"));
+
+  useEffect(() => {
+    if (user) {
+      setLiked(user.likes?.includes(article.id));
+      setBookmarked(user.bookmarks?.includes(article.id));
+    }
+  }, [article, user]);
+
+  const handleLike = () => {
+    if (!user) return alert("Please login to like articles!");
+
+    let updatedUser = { ...user };
+    if (liked) {
+      updatedUser.likes = updatedUser.likes.filter((id) => id !== article.id);
+    } else {
+      updatedUser.likes = [...(updatedUser.likes || []), article.id];
+    }
+
+    localStorage.setItem("user", JSON.stringify(updatedUser));
+    setLiked(!liked);
+  };
+
+  const handleBookmark = () => {
+    if (!user) return alert("Please login to bookmark articles!");
+
+    let updatedUser = { ...user };
+    if (bookmarked) {
+      updatedUser.bookmarks = updatedUser.bookmarks.filter(
+        (id) => id !== article.id
+      );
+    } else {
+      updatedUser.bookmarks = [...(updatedUser.bookmarks || []), article.id];
+    }
+
+    localStorage.setItem("user", JSON.stringify(updatedUser));
+    setBookmarked(!bookmarked);
+  };
 
   if (!article)
     return (
@@ -59,8 +99,22 @@ export default function ArticlePage() {
       </p>
 
       <img src={article.image} alt={article.title} className="article-image" />
-
       <p className="article-content">{article.content}</p>
+
+      <div className="article-actions">
+        <button
+          onClick={handleLike}
+          className={liked ? "liked" : ""}
+        >
+          {liked ? "❤️ Liked" : "🤍 Like"}
+        </button>
+        <button
+          onClick={handleBookmark}
+          className={bookmarked ? "bookmarked" : ""}
+        >
+          {bookmarked ? "🔖 Bookmarked" : "📑 Bookmark"}
+        </button>
+      </div>
 
       {/* Social Share Buttons */}
       <div className="social-share">

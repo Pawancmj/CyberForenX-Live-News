@@ -107,4 +107,31 @@
   background: #1e1e1e;
 }
 
+.article-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+}
 
+.article-actions button {
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  background: #f0f0f0;
+  transition: 0.3s;
+}
+
+.article-actions button:hover {
+  transform: scale(1.05);
+}
+
+button.liked {
+  background: #ff4b5c;
+  color: white;
+}
+
+button.bookmarked {
+  background: #f2c94c;
+  color: white;
+}

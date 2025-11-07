@@ -1,9 +1,10 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
 import { Menu, X, Sun, Moon, ChevronDown } from "lucide-react";
 import "./Nav.css";
 
-export default function Navbar() {
+export default function Navbar({ user, onLogout }) {
+  const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [darkMode, setDarkMode] = useState(
@@ -12,13 +13,13 @@ export default function Navbar() {
 
   const dropdownRef = useRef(null);
 
-  // 🌓 Theme toggle handler
+  // 🌓 Theme toggle
   useEffect(() => {
     document.body.setAttribute("data-theme", darkMode ? "dark" : "light");
     localStorage.setItem("theme", darkMode ? "dark" : "light");
   }, [darkMode]);
 
-  // 🔒 Close dropdown when clicking outside
+  // 🔒 Close dropdown on outside click
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
@@ -30,29 +31,32 @@ export default function Navbar() {
   }, []);
 
   const categories = [
-  { name: "National", path: "/national" },
-  { name: "International", path: "/international" },
-  { name: "Politics", path: "/politics" },
-  { name: "Sports", path: "/sports" },
-  { name: "Entertainment", path: "/entertainment" },
-  { name: "Technology", path: "/technology" },
-  { name: "Business", path: "/business" },
-  { name: "Health", path: "/health" },
-  { name: "Environment", path: "/environment" },
-  { name: "Lifestyle", path: "/lifestyle" },
-  
-  
-
-];  
+    { name: "National", path: "/national" },
+    { name: "International", path: "/international" },
+    { name: "Politics", path: "/politics" },
+    { name: "Sports", path: "/sports" },
+    { name: "Entertainment", path: "/entertainment" },
+    { name: "Technology", path: "/technology" },
+    { name: "Business", path: "/business" },
+    { name: "Health", path: "/health" },
+    { name: "Environment", path: "/environment" },
+    { name: "Lifestyle", path: "/lifestyle" },
+  ];
 
   return (
     <nav className="navbar">
-      <div className="logo">CyberForenX</div>
+      <div className="logo" onClick={() => navigate("/")}>
+        CyberForenX
+      </div>
 
       {/* 🔗 Nav Links */}
       <div className={`nav-links ${menuOpen ? "active" : ""}`}>
-        <Link to="/" onClick={() => setMenuOpen(false)}>Home</Link>
-        <Link to="/trending" onClick={() => setMenuOpen(false)}>Trending</Link>
+        <Link to="/" onClick={() => setMenuOpen(false)}>
+          Home
+        </Link>
+        <Link to="/trending" onClick={() => setMenuOpen(false)}>
+          Trending
+        </Link>
 
         {/* 🗂️ Categories Dropdown */}
         <div
@@ -69,17 +73,47 @@ export default function Navbar() {
           </button>
 
           <div className="dropdown-menu" onClick={() => setMenuOpen(false)}>
-             
-             {categories.map((cat, i) => (
-                <Link key={i} to={cat.path} className="dropdown-link">
-                 {cat.name}
-                </Link>
-              ))}
+            {categories.map((cat, i) => (
+              <Link key={i} to={cat.path} className="dropdown-link">
+                {cat.name}
+              </Link>
+            ))}
           </div>
         </div>
 
-        <Link to="/about" onClick={() => setMenuOpen(false)}>About</Link>
-        <Link to="/contact" onClick={() => setMenuOpen(false)}>Contact</Link>
+        <Link to="/about" onClick={() => setMenuOpen(false)}>
+          About
+        </Link>
+        <Link to="/contact" onClick={() => setMenuOpen(false)}>
+          Contact
+        </Link>
+
+        {/* 👤 Auth Buttons */}
+        <div className="auth-buttons">
+          {!user ? (
+            <>
+              <button
+                onClick={() => navigate("/auth?mode=login")}
+                className="auth-btn"
+              >
+                Login
+              </button>
+              <button
+                onClick={() => navigate("/auth?mode=signup")}
+                className="auth-btn signup"
+              >
+                Sign Up
+              </button>
+            </>
+          ) : (
+            <div className="logged-in">
+              <span className="username">Welcome, {user.name}</span>
+              <button onClick={onLogout} className="auth-btn logout">
+                Logout
+              </button>
+            </div>
+          )}
+        </div>
       </div>
 
       {/* 🌙☀️ Theme + Hamburger */}
@@ -103,4 +137,3 @@ export default function Navbar() {
     </nav>
   );
 }
-
