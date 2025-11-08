@@ -13,7 +13,7 @@ import Home from "./Pages/Home";
 import Trending from "./Pages/Trending";
 import About from "./Pages/About";
 import Contact from "./Pages/Contact";
-import Admin from "./Pages/Admin";
+
 import Article from "./Pages/Article";
 import National from "./Pages/National";
 import Lifestyle from "./Pages/Lifestyle";
@@ -26,6 +26,10 @@ import Sports from "./Pages/Sports";
 import Politics from "./Pages/Politics";
 import International from "./Pages/International";
 import Auth from "./Pages/Auth";
+import AdminDashboard from "./Pages/Admin/AdminDashboard";
+import AddArticle from "./Pages/Admin/AddArticle";
+import EditArticle from "./Pages/Admin/EditArticle";
+import ManageArticle from "./Pages/Admin/ManageArticle";
 
 import { AuthProvider } from "./context/AuthContext";
 
@@ -102,7 +106,7 @@ function App() {
             <Route path="/trending" element={<Trending />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
-            <Route path="/admin" element={<Admin />} />
+            
             <Route path="/article/:id" element={<Article />} />
             <Route path="/national" element={<National />} />
             <Route path="/international" element={<International />} />
@@ -114,6 +118,11 @@ function App() {
             <Route path="/health" element={<Health />} />
             <Route path="/environment" element={<Environment />} />
             <Route path="/lifestyle" element={<Lifestyle />} />
+
+            <Route path="/admin" element={<AdminDashboard />} />
+            <Route path="/admin/add" element={<AddArticle />} />
+            <Route path="/admin/edit/:id" element={<EditArticle />} />
+            <Route path="/admin/manage" element={<ManageArticle />} />
           </Routes>
 
           <Footer />
