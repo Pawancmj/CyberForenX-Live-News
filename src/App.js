@@ -32,6 +32,7 @@ import EditArticle from "./Pages/Admin/EditArticle";
 import ManageArticle from "./Pages/Admin/ManageArticle";
 
 import { AuthProvider } from "./context/AuthContext";
+import AdminStats from "./Pages/Admin/AdminStats";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -123,6 +124,7 @@ function App() {
             <Route path="/admin/add" element={<AddArticle />} />
             <Route path="/admin/edit/:id" element={<EditArticle />} />
             <Route path="/admin/manage" element={<ManageArticle />} />
+            <Route path="/admin/stats" element={<AdminStats />} />
           </Routes>
 
           <Footer />

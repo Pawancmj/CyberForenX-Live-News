@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
-import { Menu, X, Sun, Moon, ChevronDown } from "lucide-react";
+import { Menu, X, Sun, Moon, ChevronDown, Globe } from "lucide-react";
 import "./Nav.css";
 
 export default function Navbar({ user, onLogout }) {
@@ -10,6 +10,9 @@ export default function Navbar({ user, onLogout }) {
   const [darkMode, setDarkMode] = useState(
     localStorage.getItem("theme") === "dark"
   );
+  const [language, setLanguage] = useState(
+    localStorage.getItem("language") || "en"
+  );
 
   const dropdownRef = useRef(null);
 
@@ -18,6 +21,11 @@ export default function Navbar({ user, onLogout }) {
     document.body.setAttribute("data-theme", darkMode ? "dark" : "light");
     localStorage.setItem("theme", darkMode ? "dark" : "light");
   }, [darkMode]);
+
+  // 🌐 Language persist
+  useEffect(() => {
+    localStorage.setItem("language", language);
+  }, [language]);
 
   // 🔒 Close dropdown on outside click
   useEffect(() => {
@@ -30,17 +38,46 @@ export default function Navbar({ user, onLogout }) {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  // 🌐 Language translations
+  const t = (text) => {
+    const translations = {
+      en: {
+        home: "Home",
+        trending: "Trending",
+        categories: "Categories",
+        about: "About",
+        contact: "Contact",
+        login: "Login",
+        signup: "Sign Up",
+        logout: "Logout",
+        welcome: "Welcome",
+      },
+      hi: {
+        home: "होम",
+        trending: "ट्रेंडिंग",
+        categories: "श्रेणियाँ",
+        about: "हमारे बारे में",
+        contact: "संपर्क करें",
+        login: "लॉगिन",
+        signup: "साइन अप",
+        logout: "लॉगआउट",
+        welcome: "स्वागत है",
+      },
+    };
+    return translations[language][text] || text;
+  };
+
   const categories = [
-    { name: "National", path: "/national" },
-    { name: "International", path: "/international" },
-    { name: "Politics", path: "/politics" },
-    { name: "Sports", path: "/sports" },
-    { name: "Entertainment", path: "/entertainment" },
-    { name: "Technology", path: "/technology" },
-    { name: "Business", path: "/business" },
-    { name: "Health", path: "/health" },
-    { name: "Environment", path: "/environment" },
-    { name: "Lifestyle", path: "/lifestyle" },
+    { name: language === "hi" ? "राष्ट्रीय" : "National", path: "/national" },
+    { name: language === "hi" ? "अंतरराष्ट्रीय" : "International", path: "/international" },
+    { name: language === "hi" ? "राजनीति" : "Politics", path: "/politics" },
+    { name: language === "hi" ? "खेल" : "Sports", path: "/sports" },
+    { name: language === "hi" ? "मनोरंजन" : "Entertainment", path: "/entertainment" },
+    { name: language === "hi" ? "प्रौद्योगिकी" : "Technology", path: "/technology" },
+    { name: language === "hi" ? "व्यापार" : "Business", path: "/business" },
+    { name: language === "hi" ? "स्वास्थ्य" : "Health", path: "/health" },
+    { name: language === "hi" ? "पर्यावरण" : "Environment", path: "/environment" },
+    { name: language === "hi" ? "जीवनशैली" : "Lifestyle", path: "/lifestyle" },
   ];
 
   return (
@@ -52,10 +89,10 @@ export default function Navbar({ user, onLogout }) {
       {/* 🔗 Nav Links */}
       <div className={`nav-links ${menuOpen ? "active" : ""}`}>
         <Link to="/" onClick={() => setMenuOpen(false)}>
-          Home
+          {t("home")}
         </Link>
         <Link to="/trending" onClick={() => setMenuOpen(false)}>
-          Trending
+          {t("trending")}
         </Link>
 
         {/* 🗂️ Categories Dropdown */}
@@ -69,7 +106,7 @@ export default function Navbar({ user, onLogout }) {
             className="dropdown-toggle"
             onClick={() => setDropdownOpen(!dropdownOpen)}
           >
-            Categories <ChevronDown size={16} />
+            {t("categories")} <ChevronDown size={16} />
           </button>
 
           <div className="dropdown-menu" onClick={() => setMenuOpen(false)}>
@@ -82,10 +119,10 @@ export default function Navbar({ user, onLogout }) {
         </div>
 
         <Link to="/about" onClick={() => setMenuOpen(false)}>
-          About
+          {t("about")}
         </Link>
         <Link to="/contact" onClick={() => setMenuOpen(false)}>
-          Contact
+          {t("contact")}
         </Link>
 
         {/* 👤 Auth Buttons */}
@@ -96,27 +133,29 @@ export default function Navbar({ user, onLogout }) {
                 onClick={() => navigate("/auth?mode=login")}
                 className="auth-btn"
               >
-                Login
+                {t("login")}
               </button>
               <button
                 onClick={() => navigate("/auth?mode=signup")}
                 className="auth-btn signup"
               >
-                Sign Up
+                {t("signup")}
               </button>
             </>
           ) : (
             <div className="logged-in">
-              <span className="username">Welcome, {user.name}</span>
+              <span className="username">
+                {t("welcome")}, {user.name}
+              </span>
               <button onClick={onLogout} className="auth-btn logout">
-                Logout
+                {t("logout")}
               </button>
             </div>
           )}
         </div>
       </div>
 
-      {/* 🌙☀️ Theme + Hamburger */}
+      {/* 🌙☀️ Theme + Language + Hamburger */}
       <div className="nav-icons">
         <button
           className="theme-toggle"
@@ -125,6 +164,19 @@ export default function Navbar({ user, onLogout }) {
         >
           {darkMode ? <Sun /> : <Moon />}
         </button>
+
+        {/* 🌐 Language Switcher */}
+        <div className="language-switcher">
+          <Globe size={18} />
+          <select
+            value={language}
+            onChange={(e) => setLanguage(e.target.value)}
+            className="lang-dropdown"
+          >
+            <option value="en">EN</option>
+            <option value="hi">हिंदी</option>
+          </select>
+        </div>
 
         <button
           className="menu-toggle"

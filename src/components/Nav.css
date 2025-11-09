@@ -226,5 +226,29 @@
   color: var(--bg-color);
 }
 
+/* 🌐 Language Switcher */
+.language-switcher {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  border: 1px solid var(--accent);
+  border-radius: 6px;
+  padding: 4px 8px;
+}
+
+.lang-dropdown {
+  background: transparent;
+  color: var(--text-color);
+  border: none;
+  outline: none;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.lang-dropdown option {
+  background: var(--bg-color);
+  color: var(--text-color);
+}
 
 

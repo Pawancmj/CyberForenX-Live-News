@@ -1,0 +1,14 @@
+{
+  "home": "Home",
+  "national": "National",
+  "international": "International",
+  "sports": "Sports",
+  "tech": "Technology",
+  "business": "Business",
+  "entertainment": "Entertainment",
+  "admin_panel": "Admin Panel",
+  "add_article": "Add Article",
+  "manage_articles": "Manage Articles",
+  "analytics_dashboard": "Analytics Dashboard",
+  "welcome": "Welcome to CyberForenX News"
+}
