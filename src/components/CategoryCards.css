@@ -84,3 +84,15 @@
 .nav-btn:hover {
   background: #333;
 }
+
+/* Mobile View Fix */
+@media (max-width: 768px) {
+  .card {
+    min-width: 100% !important;
+    margin: 0 5px;
+  }
+
+  .slider-track {
+    padding-left: 5px;
+  }
+}
