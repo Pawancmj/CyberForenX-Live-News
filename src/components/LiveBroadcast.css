@@ -1,46 +1,115 @@
 /* ===== Live Broadcast Section ===== */
 .live {
   text-align: center;
-  
-  padding: 40px 20px;
+  padding: 50px 20px;
   margin-top: 30px;
-   border-top: 4px solid #e63946;/* Red line on top for emphasis */
+  border-top: 4px solid #e63946;
+  background: #f8f9fa;
+  color: #000;
+  transition: background 0.4s ease, color 0.4s ease;
+}
+
+[data-theme="dark"] .live {
+  background: #121212;
+  color: #fff;
+  border-top: 4px solid #ff5252;
 }
 
 /* ===== Heading ===== */
 .live h2 {
   color: #e63946;
-  font-size: 1.8rem;
-  margin-bottom: 20px;
+  font-size: 2rem;
+  margin-bottom: 25px;
   font-weight: 700;
   letter-spacing: 1px;
 }
 
-/* ===== Iframe Container ===== */
-.live iframe {
-  border: none;
-  border-radius: 10px;
-  width: 80%;
-  max-width: 700px;
-  height: 400px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+[data-theme="dark"] .live h2 {
+  color: #ff5252;
 }
 
-/* ===== Hover Animation ===== */
-.live iframe:hover {
-  transform: scale(1.02);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+/* ===== Main Live Video ===== */
+.main-video {
+  margin-bottom: 40px;
+}
+
+.main-video iframe {
+  border: none;
+  border-radius: 12px;
+  width: 80%;
+  max-width: 800px;
+  height: 420px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.main-video iframe:hover {
+  transform: scale(1.03);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+}
+
+.main-video h3 {
+  margin-top: 15px;
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+/* ===== Extra Video Grid ===== */
+.video-grid {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.video-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 300px;
+}
+
+[data-theme="dark"] .video-card {
+  background: #1e1e1e;
+  color: #fff;
+}
+
+.video-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+.video-card iframe {
+  width: 100%;
+  height: 170px;
+  border: none;
+}
+
+.video-card p {
+  padding: 10px;
+  font-weight: 500;
 }
 
 /* ===== Responsive Design ===== */
 @media (max-width: 768px) {
-  .live iframe {
+  .main-video iframe {
     width: 100%;
-    height: 250px;
+    height: 260px;
+  }
+
+  .video-grid {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .video-card {
+    width: 90%;
   }
 
   .live h2 {
-    font-size: 1.4rem;
+    font-size: 1.6rem;
   }
 }
+

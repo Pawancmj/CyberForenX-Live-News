@@ -3,24 +3,15 @@ import { useState, useEffect, useRef } from "react";
 import { Menu, X, Sun, Moon, ChevronDown, Globe } from "lucide-react";
 import "./Nav.css";
 
-export default function Navbar({ user, onLogout }) {
+export default function Navbar({ user, onLogout, darkMode, setDarkMode }) {
   const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [darkMode, setDarkMode] = useState(
-    localStorage.getItem("theme") === "dark"
-  );
   const [language, setLanguage] = useState(
     localStorage.getItem("language") || "en"
   );
 
   const dropdownRef = useRef(null);
-
-  // 🌓 Theme toggle
-  useEffect(() => {
-    document.body.setAttribute("data-theme", darkMode ? "dark" : "light");
-    localStorage.setItem("theme", darkMode ? "dark" : "light");
-  }, [darkMode]);
 
   // 🌐 Language persist
   useEffect(() => {
@@ -38,7 +29,7 @@ export default function Navbar({ user, onLogout }) {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // 🌐 Language translations
+  // 🌐 Translations
   const t = (text) => {
     const translations = {
       en: {
@@ -95,7 +86,7 @@ export default function Navbar({ user, onLogout }) {
           {t("trending")}
         </Link>
 
-        {/* 🗂️ Categories Dropdown */}
+        {/* 🗂️ Dropdown */}
         <div
           className={`dropdown ${dropdownOpen ? "open" : ""}`}
           ref={dropdownRef}
@@ -118,12 +109,8 @@ export default function Navbar({ user, onLogout }) {
           </div>
         </div>
 
-        <Link to="/about" onClick={() => setMenuOpen(false)}>
-          {t("about")}
-        </Link>
-        <Link to="/contact" onClick={() => setMenuOpen(false)}>
-          {t("contact")}
-        </Link>
+        <Link to="/about">{t("about")}</Link>
+        <Link to="/contact">{t("contact")}</Link>
 
         {/* 👤 Auth Buttons */}
         <div className="auth-buttons">
@@ -155,7 +142,7 @@ export default function Navbar({ user, onLogout }) {
         </div>
       </div>
 
-      {/* 🌙☀️ Theme + Language + Hamburger */}
+      {/* 🌙☀️ + Language + Hamburger */}
       <div className="nav-icons">
         <button
           className="theme-toggle"
@@ -165,7 +152,6 @@ export default function Navbar({ user, onLogout }) {
           {darkMode ? <Sun /> : <Moon />}
         </button>
 
-        {/* 🌐 Language Switcher */}
         <div className="language-switcher">
           <Globe size={18} />
           <select

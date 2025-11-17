@@ -1,40 +1,44 @@
+// src/Pages/Business.js
 import "./CategoryPage.css";
 
 export default function Business() {
+  const fallbackImages = {
+    Markets: "https://cdn-icons-png.flaticon.com/512/3135/3135706.png",
+    Startups: "https://cdn-icons-png.flaticon.com/512/3759/3759877.png",
+    General: "https://cdn-icons-png.flaticon.com/512/2965/2965879.png",
+  };
+
   const sections = [
     {
-      name: "Stock Market",
-      banner: "https://images.unsplash.com/photo-1565372918670-3f7a1a6d8745?w=800",
+      name: "Markets",
+      banner: "https://images.unsplash.com/photo-1531379410501-5a3d3d5a3b3d?w=800",
       news: [
         {
-          title: "Markets End on a High Note",
-          description: "Sensex and Nifty close with record-breaking gains.",
-          img: "https://images.unsplash.com/photo-1581091870622-84e30c0a6b42?w=800",
-          likes: Math.floor(Math.random() * 900) + 100,
+          title: "Sensex Hits New High",
+          description: "Markets rally on positive corporate earnings.",
+          img: "https://images.unsplash.com/photo-1542223616-1c7f3a1f2f0a?w=800",
+          likes: 320,
+          url: "https://example.com/business1",
         },
         {
-          title: "Investors Show Confidence Amid Global Uncertainty",
-          description: "Retail participation increases in equities.",
-          img: "https://images.unsplash.com/photo-1556742400-b5c26e1bdb23?w=800",
-          likes: Math.floor(Math.random() * 900) + 100,
+          title: "Rupee Strengthens",
+          description: "Currency gains as FII inflows rise.",
+          img: "invalid-link.jpg",
+          likes: 210,
+          url: "https://example.com/business2",
         },
       ],
     },
     {
       name: "Startups",
-      banner: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800",
+      banner: "https://images.unsplash.com/photo-1492724441997-5dc865305da7?w=800",
       news: [
         {
-          title: "New Fintech Startup Raises $50M",
-          description: "Investors back new-age finance management platform.",
-          img: "https://images.unsplash.com/photo-1542744094-24638eff58bb?w=800",
-          likes: Math.floor(Math.random() * 900) + 100,
-        },
-        {
-          title: "India Becomes Hub for AI Startups",
-          description: "Entrepreneurs focus on innovation and data solutions.",
-          img: "https://images.unsplash.com/photo-1532619187608-e5375cab36a6?w=800",
-          likes: Math.floor(Math.random() * 900) + 100,
+          title: "Unicorn Valuation Rises",
+          description: "Funding round values the startup at $1B+.",
+          img: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800",
+          likes: 450,
+          url: "https://example.com/business3",
         },
       ],
     },
@@ -42,21 +46,38 @@ export default function Business() {
 
   return (
     <div className="category-page">
-      <h1 className="category-title">Business News</h1>
-      {sections.map((section, i) => (
-        <div key={i} className="category-section">
+      <h1 className="category-title">Business</h1>
+
+      {sections.map((section, sidx) => (
+        <div key={sidx} className="category-section">
           <div className="category-header">
-            <img src={section.banner} alt={section.name} className="category-banner" />
+            <img
+              src={section.banner}
+              alt={section.name}
+              className="category-banner"
+              onError={(e) => (e.target.src = fallbackImages[section.name] || fallbackImages.General)}
+            />
             <h2>{section.name}</h2>
           </div>
+
           <div className="news-cards">
-            {section.news.map((item, j) => (
-              <div key={j} className="news-card">
-                <img src={item.img} alt={item.title} className="news-img" />
+            {section.news.map((item, idx) => (
+              <div key={idx} className="news-card">
+                <img
+                  src={item.img}
+                  alt={item.title}
+                  className="news-img"
+                  onError={(e) => (e.target.src = fallbackImages[section.name] || fallbackImages.General)}
+                />
                 <div className="news-info">
                   <h3>{item.title}</h3>
                   <p>{item.description}</p>
-                  <div className="like-section">❤️ {item.likes} Likes</div>
+                  <div className="card-footer">
+                    <button className="read-more-btn" onClick={() => window.open(item.url, "_blank")}>
+                      Read More
+                    </button>
+                    <span className="like-section">❤️ {item.likes}</span>
+                  </div>
                 </div>
               </div>
             ))}
@@ -66,3 +87,4 @@ export default function Business() {
     </div>
   );
 }
+

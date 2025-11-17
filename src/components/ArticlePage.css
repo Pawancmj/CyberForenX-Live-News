@@ -135,3 +135,70 @@ button.bookmarked {
   background: #f2c94c;
   color: white;
 }
+
+/* DARK MODE FIX FOR HOME PAGE ARTICLE CARDS */
+[data-theme="dark"] .article-card,
+[data-theme="dark"] .article-card * {
+  color: #ffffff !important;
+}
+
+[data-theme="dark"] .article-card {
+  background: #1a1a1a !important;
+  border-color: #333 !important;
+}
+
+/* ensure icons also white */
+[data-theme="dark"] .article-card svg,
+[data-theme="dark"] .article-card i {
+  color: #fff !important;
+}
+
+/* category, date, views */
+[data-theme="dark"] .meta,
+[data-theme="dark"] .meta * {
+  color: #ccc !important;
+}
+
+
+[data-theme="dark"] .article-page {
+  color: #ffffff !important;
+}
+
+[data-theme="dark"] .article-page h1,
+[data-theme="dark"] .article-page h2,
+[data-theme="dark"] .article-page h3,
+[data-theme="dark"] .article-page p,
+[data-theme="dark"] .article-page span {
+  color: #ffffff !important;
+}
+
+
+[data-theme="dark"] .recommend-card p {
+  color: #ffffff !important;
+}
+
+
+[data-theme="dark"] .article-meta {
+  color: #cccccc !important;
+}
+
+/* Buttons */
+[data-theme="dark"] .article-actions button {
+  background: #222 !important;
+  color: #fff !important;
+  border: 1px solid #555 !important;
+}
+
+[data-theme="dark"] .social-share button {
+  background: #222 !important;
+  color: #fff !important;
+  border: 1px solid #444 !important;
+}
+
+
+[data-theme="dark"] .recommended {
+  background: #1a1a1a !important;
+}
+
+
+

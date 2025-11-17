@@ -1,40 +1,44 @@
+// src/Pages/Entertainment.js
 import "./CategoryPage.css";
 
 export default function Entertainment() {
+  const fallbackImages = {
+    Movies: "https://cdn-icons-png.flaticon.com/512/2920/2920362.png",
+    Music: "https://cdn-icons-png.flaticon.com/512/727/727218.png",
+    General: "https://cdn-icons-png.flaticon.com/512/2965/2965879.png",
+  };
+
   const sections = [
     {
-      name: "Bollywood",
-      banner: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=800",
+      name: "Movies",
+      banner: "https://images.unsplash.com/photo-1517604931442-7f7a6f2b2d0b?w=800",
       news: [
         {
-          title: "New Movie 'Phoenix' Breaks Box Office Records",
-          description: "The latest action thriller becomes an instant hit.",
-          img: "https://images.unsplash.com/photo-1598899134739-24c46f58a3d2?w=800",
-          likes: Math.floor(Math.random() * 900) + 100,
+          title: "Blockbuster Premiere",
+          description: "Audience cheers at the new film release.",
+          img: "https://images.unsplash.com/photo-1517604931442-7f7a6f2b2d0b?w=800",
+          likes: 980,
+          url: "https://example.com/ent1",
         },
         {
-          title: "Actor Announces Upcoming Web Series",
-          description: "Fans excited as superstar reveals OTT debut.",
-          img: "https://images.unsplash.com/photo-1497032628192-86f99bcd76bc?w=800",
-          likes: Math.floor(Math.random() * 900) + 100,
+          title: "Director Wins Award",
+          description: "Prestigious cinema award for storytelling.",
+          img: "invalid.jpg",
+          likes: 410,
+          url: "https://example.com/ent2",
         },
       ],
     },
     {
       name: "Music",
-      banner: "https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=800",
+      banner: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=800",
       news: [
         {
-          title: "New Pop Album Tops Charts Worldwide",
-          description: "Listeners praise the unique sound and lyrics.",
+          title: "New Album Tops Charts",
+          description: "Singer's latest work becomes instant hit.",
           img: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=800",
-          likes: Math.floor(Math.random() * 900) + 100,
-        },
-        {
-          title: "Global Music Festival Returns",
-          description: "Thousands attend the grand comeback event.",
-          img: "https://images.unsplash.com/photo-1487180144351-b8472da7d491?w=800",
-          likes: Math.floor(Math.random() * 900) + 100,
+          likes: 760,
+          url: "https://example.com/ent3",
         },
       ],
     },
@@ -42,21 +46,38 @@ export default function Entertainment() {
 
   return (
     <div className="category-page">
-      <h1 className="category-title">Entertainment News</h1>
-      {sections.map((section, i) => (
-        <div key={i} className="category-section">
+      <h1 className="category-title">Entertainment</h1>
+
+      {sections.map((section, sidx) => (
+        <div key={sidx} className="category-section">
           <div className="category-header">
-            <img src={section.banner} alt={section.name} className="category-banner" />
+            <img
+              src={section.banner}
+              alt={section.name}
+              className="category-banner"
+              onError={(e) => (e.target.src = fallbackImages[section.name] || fallbackImages.General)}
+            />
             <h2>{section.name}</h2>
           </div>
+
           <div className="news-cards">
-            {section.news.map((item, j) => (
-              <div key={j} className="news-card">
-                <img src={item.img} alt={item.title} className="news-img" />
+            {section.news.map((item, idx) => (
+              <div key={idx} className="news-card">
+                <img
+                  src={item.img}
+                  alt={item.title}
+                  className="news-img"
+                  onError={(e) => (e.target.src = fallbackImages[section.name] || fallbackImages.General)}
+                />
                 <div className="news-info">
                   <h3>{item.title}</h3>
                   <p>{item.description}</p>
-                  <div className="like-section">❤️ {item.likes} Likes</div>
+                  <div className="card-footer">
+                    <button className="read-more-btn" onClick={() => window.open(item.url, "_blank")}>
+                      Read More
+                    </button>
+                    <span className="like-section">❤️ {item.likes}</span>
+                  </div>
                 </div>
               </div>
             ))}

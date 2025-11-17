@@ -1,7 +1,10 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import "./Trending.css";
 
 export default function Trending() {
+  const navigate = useNavigate();
+
   const trendingNews = [
     {
       id: 1,
@@ -54,7 +57,12 @@ export default function Trending() {
               <span className="category">{news.category}</span>
               <h2>{news.title}</h2>
               <p>{news.description}</p>
-              <button className="read-btn">Read More →</button>
+              <button
+                className="read-btn"
+                onClick={() => navigate(`/news/${news.id}`)}
+              >
+                Read More →
+              </button>
             </div>
           </div>
         ))}
@@ -62,4 +70,3 @@ export default function Trending() {
     </div>
   );
 }
-

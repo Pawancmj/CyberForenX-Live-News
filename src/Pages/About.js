@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
-export default function About() {
+export default function About({ darkMode }) {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -10,6 +10,12 @@ export default function About() {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+
+  // 🎨 Theme colors based on mode
+  const bgColor = darkMode ? "rgba(15, 23, 42, 0.9)" : "#f9fafb";
+  const cardBg = darkMode ? "rgba(30, 41, 59, 0.9)" : "white";
+  const textColor = darkMode ? "#e2e8f0" : "#1e293b";
+  const titleColor = darkMode ? "#38bdf8" : "#0284c7";
 
   return (
     <section
@@ -20,23 +26,28 @@ export default function About() {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        color: "white",
+        backgroundColor: bgColor,
+        color: textColor,
         overflowX: "hidden",
         padding: "40px 15px",
+        transition: "background-color 0.4s ease, color 0.4s ease",
       }}
     >
       <div
         style={{
           width: "100%",
           maxWidth: "1100px",
-          backgroundColor: "rgba(30, 41, 59, 0.9)",
+          backgroundColor: cardBg,
           borderRadius: "20px",
           padding: isMobile ? "25px 20px" : "50px",
-          boxShadow: "0 8px 20px rgba(0,0,0,0.4)",
+          boxShadow: darkMode
+            ? "0 8px 20px rgba(0,0,0,0.4)"
+            : "0 4px 12px rgba(0,0,0,0.1)",
           display: "flex",
           flexDirection: "column",
           gap: "30px",
           textAlign: isMobile ? "center" : "left",
+          transition: "background-color 0.4s ease",
         }}
       >
         {/* TITLE */}
@@ -46,7 +57,7 @@ export default function About() {
           transition={{ duration: 0.7 }}
           style={{
             fontSize: isMobile ? "2rem" : "2.6rem",
-            color: "#38bdf8",
+            color: titleColor,
             fontWeight: "700",
             textAlign: "center",
           }}
@@ -62,116 +73,79 @@ export default function About() {
           style={{
             fontSize: "1.1rem",
             lineHeight: "1.8",
-            color: "#cbd5e1",
           }}
         >
-          <strong>CyberForenX Live News</strong> is your trusted digital destination for the latest
-          technology, cybersecurity, and innovation updates. Our mission is to make complex tech
-          topics accessible, insightful, and engaging for everyone — from IT professionals to
-          curious readers.
+          <strong>CyberForenX Live News</strong> is your trusted destination for
+          the latest technology, cybersecurity, and innovation updates. Our
+          mission is to make complex tech topics accessible, insightful, and
+          engaging for everyone — from IT professionals to curious readers.
         </motion.p>
 
         {/* MISSION SECTION */}
-        <motion.div
-          initial={{ x: -50, opacity: 0 }}
-          animate={{ x: 0, opacity: 1 }}
-          transition={{ delay: 0.5, duration: 0.8 }}
-          style={{
-            backgroundColor: "rgba(15, 23, 42, 0.8)",
-            padding: "25px",
-            borderRadius: "12px",
-          }}
-        >
-          <h2 style={{ color: "#38bdf8", marginBottom: "10px", fontSize: "1.4rem" }}>
-            🌍 Our Mission
-          </h2>
-          <p style={{ color: "#e2e8f0", lineHeight: "1.7" }}>
-            At CyberForenX, our goal is to empower readers with authentic and timely information.
-            We’re committed to highlighting stories that matter — from AI breakthroughs and data
-            privacy concerns to digital transformation and startups shaping the future.
-          </p>
-        </motion.div>
+        <Section
+          title="🌍 Our Mission"
+          text="At CyberForenX, our goal is to empower readers with authentic and timely information. We highlight stories that matter — from AI breakthroughs and data privacy concerns to startups shaping the digital world."
+          color={titleColor}
+          bg={darkMode ? "rgba(15,23,42,0.8)" : "#f1f5f9"}
+        />
 
         {/* VISION SECTION */}
-        <motion.div
-          initial={{ x: 50, opacity: 0 }}
-          animate={{ x: 0, opacity: 1 }}
-          transition={{ delay: 0.7, duration: 0.8 }}
-          style={{
-            backgroundColor: "rgba(15, 23, 42, 0.8)",
-            padding: "25px",
-            borderRadius: "12px",
-          }}
-        >
-          <h2 style={{ color: "#38bdf8", marginBottom: "10px", fontSize: "1.4rem" }}>
-            💡 Our Vision
-          </h2>
-          <p style={{ color: "#e2e8f0", lineHeight: "1.7" }}>
-            We envision a future where information is unbiased, credible, and accessible to all.
-            CyberForenX aims to become a global platform where technology meets journalism —
-            connecting readers with trends that define our digital world.
-          </p>
-        </motion.div>
+        <Section
+          title="💡 Our Vision"
+          text="We envision a future where information is unbiased and accessible to all. CyberForenX aims to connect readers with the trends that define our digital world."
+          color={titleColor}
+          bg={darkMode ? "rgba(15,23,42,0.8)" : "#f1f5f9"}
+        />
 
         {/* EDITORIAL VALUES */}
-        <motion.div
-          initial={{ y: 30, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 0.9, duration: 0.8 }}
-          style={{
-            backgroundColor: "rgba(15, 23, 42, 0.8)",
-            padding: "25px",
-            borderRadius: "12px",
-          }}
-        >
-          <h2 style={{ color: "#38bdf8", marginBottom: "10px", fontSize: "1.4rem" }}>
-            🧭 Editorial Integrity
-          </h2>
-          <p style={{ color: "#e2e8f0", lineHeight: "1.7" }}>
-            Our content is driven by accuracy, independence, and responsibility. We fact-check every
-            report and ensure that our news coverage remains free from bias or external influence.
-            CyberForenX follows global journalism ethics to keep readers informed, not misled.
-          </p>
-        </motion.div>
+        <Section
+          title="🧭 Editorial Integrity"
+          text="Our content is driven by accuracy, independence, and responsibility. We fact-check every report and follow global journalism ethics to keep readers informed, not misled."
+          color={titleColor}
+          bg={darkMode ? "rgba(15,23,42,0.8)" : "#f1f5f9"}
+        />
 
-        {/* TEAM SECTION */}
-        <motion.div
-          initial={{ y: 50, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 1.1, duration: 0.8 }}
-          style={{
-            backgroundColor: "rgba(15, 23, 42, 0.8)",
-            padding: "25px",
-            borderRadius: "12px",
-            textAlign: isMobile ? "center" : "left",
-          }}
-        >
-          <h2 style={{ color: "#38bdf8", marginBottom: "10px", fontSize: "1.4rem" }}>
-            👥 Our Team
-          </h2>
-          <p style={{ color: "#e2e8f0", lineHeight: "1.7" }}>
-            Behind CyberForenX is a passionate group of journalists, tech analysts, and digital
-            creators — united by a common goal: to report technology that impacts lives.  
-            We believe in innovation, transparency, and storytelling that sparks awareness.
-          </p>
-        </motion.div>
+        {/* TEAM */}
+        <Section
+          title="👥 Our Team"
+          text="Behind CyberForenX is a passionate group of journalists, tech analysts, and digital creators — united by a common goal: to report technology that impacts lives."
+          color={titleColor}
+          bg={darkMode ? "rgba(15,23,42,0.8)" : "#f1f5f9"}
+        />
 
         {/* FOOTNOTE */}
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 1.3, duration: 0.8 }}
+          transition={{ delay: 1.2, duration: 0.8 }}
           style={{
             textAlign: "center",
-            color: "#94a3b8",
+            color: darkMode ? "#94a3b8" : "#475569",
             fontSize: "0.95rem",
-            marginTop: "10px",
           }}
         >
-          © {new Date().getFullYear()} CyberForenX Live News — Empowering the Digital World.
+          © {new Date().getFullYear()} CyberForenX Live News — Empowering the
+          Digital World.
         </motion.p>
       </div>
     </section>
   );
 }
 
+// ✅ Reusable section component
+const Section = ({ title, text, color, bg }) => (
+  <motion.div
+    initial={{ y: 30, opacity: 0 }}
+    animate={{ y: 0, opacity: 1 }}
+    transition={{ duration: 0.8 }}
+    style={{
+      backgroundColor: bg,
+      padding: "25px",
+      borderRadius: "12px",
+      transition: "background-color 0.4s ease",
+    }}
+  >
+    <h2 style={{ color, marginBottom: "10px", fontSize: "1.4rem" }}>{title}</h2>
+    <p style={{ lineHeight: "1.7" }}>{text}</p>
+  </motion.div>
+);

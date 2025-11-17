@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { FaYoutube, FaFacebookF, FaTwitter, FaInstagram } from "react-icons/fa";
 
-export default function Contact() {
+export default function Contact({ darkMode }) {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -11,6 +11,14 @@ export default function Contact() {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+
+  const bgColor = darkMode ? "rgba(15, 23, 42, 0.9)" : "rgba(255, 255, 255, 0.9)";
+  const cardBg = darkMode ? "rgba(30, 41, 59, 0.9)" : "rgba(245, 245, 245, 0.9)";
+  const textColor = darkMode ? "#fff" : "#000";
+  const headingColor = darkMode ? "#38bdf8" : "#007bff";
+  const inputBg = darkMode ? "#0f172a" : "#f1f5f9";
+  const inputText = darkMode ? "#fff" : "#000";
+  const borderColor = darkMode ? "#475569" : "#ccc";
 
   return (
     <section
@@ -21,16 +29,18 @@ export default function Contact() {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        color: "white",
         overflowX: "hidden",
         padding: "40px 15px",
+        backgroundColor: bgColor,
+        color: textColor,
+        transition: "all 0.4s ease",
       }}
     >
       <div
         style={{
           width: "100%",
           maxWidth: "1100px",
-          backgroundColor: "rgba(30, 41, 59, 0.9)",
+          backgroundColor: cardBg,
           borderRadius: "20px",
           padding: isMobile ? "25px 20px" : "50px",
           boxShadow: "0 8px 20px rgba(0,0,0,0.4)",
@@ -38,6 +48,7 @@ export default function Contact() {
           gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
           gap: isMobile ? "30px" : "50px",
           textAlign: isMobile ? "center" : "left",
+          transition: "background-color 0.4s ease, color 0.4s ease",
         }}
       >
         {/* LEFT SIDE */}
@@ -50,8 +61,9 @@ export default function Contact() {
             style={{
               fontSize: isMobile ? "2rem" : "2.5rem",
               fontWeight: "700",
-              color: "#38bdf8",
+              color: headingColor,
               marginBottom: "20px",
+              transition: "color 0.4s ease",
             }}
           >
             Get in Touch with CyberForenX Live News
@@ -61,7 +73,7 @@ export default function Contact() {
           </p>
           <p
             style={{
-              color: "#cbd5e1",
+              color: darkMode ? "#cbd5e1" : "#333",
               lineHeight: "1.7",
               marginBottom: "30px",
             }}
@@ -74,17 +86,18 @@ export default function Contact() {
           {/* Contact Info Box */}
           <div
             style={{
-              backgroundColor: "rgba(15, 23, 42, 0.8)",
+              backgroundColor: darkMode ? "#1e293b" : "#f8fafc",
               padding: "20px",
               borderRadius: "12px",
               lineHeight: "1.8",
               fontSize: "1rem",
-              color: "#e2e8f0",
+              color: textColor,
+              transition: "background-color 0.4s ease, color 0.4s ease",
             }}
           >
             <h3
               style={{
-                color: "#38bdf8",
+                color: headingColor,
                 fontSize: "1.3rem",
                 marginBottom: "10px",
               }}
@@ -106,42 +119,10 @@ export default function Contact() {
                 fontSize: "1.5rem",
               }}
             >
-              <a
-                href="https://www.youtube.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="YouTube"
-                style={{ color: "#ff0000" }}
-              >
-                <FaYoutube />
-              </a>
-              <a
-                href="https://www.facebook.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Facebook"
-                style={{ color: "#1877f2" }}
-              >
-                <FaFacebookF />
-              </a>
-              <a
-                href="https://twitter.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Twitter"
-                style={{ color: "#1da1f2" }}
-              >
-                <FaTwitter />
-              </a>
-              <a
-                href="https://www.instagram.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Instagram"
-                style={{ color: "#e1306c" }}
-              >
-                <FaInstagram />
-              </a>
+              <a href="https://www.youtube.com" target="_blank" rel="noreferrer" style={{ color: "#ff0000" }}><FaYoutube /></a>
+              <a href="https://www.facebook.com" target="_blank" rel="noreferrer" style={{ color: "#1877f2" }}><FaFacebookF /></a>
+              <a href="https://twitter.com" target="_blank" rel="noreferrer" style={{ color: "#1da1f2" }}><FaTwitter /></a>
+              <a href="https://www.instagram.com" target="_blank" rel="noreferrer" style={{ color: "#e1306c" }}><FaInstagram /></a>
             </div>
           </div>
         </motion.div>
@@ -157,28 +138,17 @@ export default function Contact() {
             gap: "18px",
           }}
         >
-          <div
-            style={{
-              display: "flex",
-              gap: "15px",
-              flexWrap: "wrap",
-            }}
-          >
-            <input type="text" placeholder="First Name" style={inputStyle} required />
-            <input type="text" placeholder="Last Name" style={inputStyle} required />
+          <div style={{ display: "flex", gap: "15px", flexWrap: "wrap" }}>
+            <input type="text" placeholder="First Name" style={inputStyle(inputBg, inputText, borderColor)} required />
+            <input type="text" placeholder="Last Name" style={inputStyle(inputBg, inputText, borderColor)} required />
           </div>
-          <input type="email" placeholder="Email *" style={inputStyle} required />
-          <textarea
-            placeholder="Message"
-            rows="5"
-            style={{ ...inputStyle, resize: "none" }}
-            required
-          ></textarea>
+          <input type="email" placeholder="Email *" style={inputStyle(inputBg, inputText, borderColor)} required />
+          <textarea placeholder="Message" rows="5" style={{ ...inputStyle(inputBg, inputText, borderColor), resize: "none" }} required></textarea>
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             style={{
-              backgroundColor: "#38bdf8",
+              backgroundColor: headingColor,
               color: "white",
               fontWeight: "600",
               border: "none",
@@ -196,15 +166,16 @@ export default function Contact() {
   );
 }
 
-const inputStyle = {
+const inputStyle = (bg, color, border) => ({
   flex: 1,
   minWidth: "47%",
   padding: "12px 15px",
   borderRadius: "8px",
-  border: "1px solid #475569",
-  backgroundColor: "#0f172a",
-  color: "white",
+  border: `1px solid ${border}`,
+  backgroundColor: bg,
+  color,
   fontSize: "1rem",
   outline: "none",
   boxSizing: "border-box",
-};
+  transition: "all 0.4s ease",
+});

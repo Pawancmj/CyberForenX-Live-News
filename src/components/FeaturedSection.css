@@ -1,66 +1,58 @@
-/* ===== Featured Section Container ===== */
 .featured {
-  padding: 50px 20px;
+  padding: 40px 20px;
   text-align: center;
-  border-top: 3px solid #e63946;
+  background-color: #f8f9fa;
+  color: #000;
+  transition: background-color 0.4s ease, color 0.4s ease;
 }
 
-/* ===== Section Title ===== */
-.featured h2 {
-  color: #e63946;
-  font-size: 1.8rem;
-  margin-bottom: 30px;
-  font-weight: 700;
-  letter-spacing: 0.5px;
+[data-theme="dark"] .featured {
+  background-color: #121212;
+  color: #fff;
 }
 
-/* ===== Grid Layout ===== */
 .featured-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 25px;
-  justify-items: center;
+  margin-top: 20px;
 }
 
-/* ===== Each Card ===== */
 .featured-card {
-  background-color: #ffffff;
-  border-radius: 10px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  background: #fff;
+  border-radius: 12px;
   overflow: hidden;
-  width: 280px;
-  cursor: pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, background 0.4s ease, color 0.4s ease;
 }
 
-/* ===== Image Styling ===== */
+[data-theme="dark"] .featured-card {
+  background: #2a2a2a;
+  color: #fff;
+}
+
+.featured-card:hover {
+  transform: translateY(-5px);
+}
+
 .featured-card img {
   width: 100%;
-  height: 180px;
+  height: 120px;
   object-fit: cover;
 }
 
-/* ===== Title Styling ===== */
-.featured-card h4 {
-  padding: 15px;
-  font-size: 1.1rem;
-  color: #0d1b2a;
-  font-weight: 600;
+.read-btn {
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 10px;
+  font-size: 14px;
+  transition: 0.3s;
 }
 
-/* ===== Hover Effects ===== */
-.featured-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.25);
-}
-
-/* ===== Responsive ===== */
-@media (max-width: 768px) {
-  .featured h2 {
-    font-size: 1.5rem;
-  }
-
-  .featured-card {
-    width: 90%;
-  }
+.read-btn:hover {
+  background: #0056b3;
 }

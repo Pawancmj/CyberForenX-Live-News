@@ -1,40 +1,37 @@
+// src/Pages/Environment.js
 import "./CategoryPage.css";
 
 export default function Environment() {
+  const fallbackImages = {
+    Climate: "https://cdn-icons-png.flaticon.com/512/1684/1684352.png",
+    Wildlife: "https://cdn-icons-png.flaticon.com/512/616/616514.png",
+    General: "https://cdn-icons-png.flaticon.com/512/2965/2965879.png",
+  };
+
   const sections = [
     {
-      name: "Climate Change",
-      banner: "https://images.unsplash.com/photo-1502786129293-79981df4e689?w=800",
+      name: "Climate",
+      banner: "https://images.unsplash.com/photo-1501894194-7c5e61f0e38f?w=800",
       news: [
         {
-          title: "Earth’s Temperature Hits Record High",
-          description: "UN reports alarming global warming patterns.",
-          img: "https://images.unsplash.com/photo-1521207418485-99c705420785?w=800",
-          likes: Math.floor(Math.random() * 900) + 100,
-        },
-        {
-          title: "New Green Energy Initiatives Launched",
-          description: "Countries invest heavily in renewable projects.",
-          img: "https://images.unsplash.com/photo-1556761175-4b46a572b786?w=800",
-          likes: Math.floor(Math.random() * 900) + 100,
+          title: "New Climate Pledge Announced",
+          description: "Countries commit to stronger emissions targets.",
+          img: "https://images.unsplash.com/photo-1501894194-7c5e61f0e38f?w=800",
+          likes: 480,
+          url: "https://example.com/env1",
         },
       ],
     },
     {
       name: "Wildlife",
-      banner: "https://images.unsplash.com/photo-1546182990-dffeafbe841d?w=800",
+      banner: "https://images.unsplash.com/photo-1501706362039-c6e809f7d5c5?w=800",
       news: [
         {
-          title: "Tiger Population Sees Growth",
-          description: "Conservation efforts lead to positive results.",
-          img: "https://images.unsplash.com/photo-1518791841217-8f162f1e1131?w=800",
-          likes: Math.floor(Math.random() * 900) + 100,
-        },
-        {
-          title: "Deforestation Rate Declines",
-          description: "NGOs work with communities to protect forests.",
-          img: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800",
-          likes: Math.floor(Math.random() * 900) + 100,
+          title: "Conservation Efforts Boost Wildlife",
+          description: "Protected areas show recovery in biodiversity.",
+          img: "invalid.jpg",
+          likes: 260,
+          url: "https://example.com/env2",
         },
       ],
     },
@@ -42,21 +39,38 @@ export default function Environment() {
 
   return (
     <div className="category-page">
-      <h1 className="category-title">Environment News</h1>
-      {sections.map((section, i) => (
-        <div key={i} className="category-section">
+      <h1 className="category-title">Environment</h1>
+
+      {sections.map((section, sidx) => (
+        <div key={sidx} className="category-section">
           <div className="category-header">
-            <img src={section.banner} alt={section.name} className="category-banner" />
+            <img
+              src={section.banner}
+              alt={section.name}
+              className="category-banner"
+              onError={(e) => (e.target.src = fallbackImages[section.name] || fallbackImages.General)}
+            />
             <h2>{section.name}</h2>
           </div>
+
           <div className="news-cards">
-            {section.news.map((item, j) => (
-              <div key={j} className="news-card">
-                <img src={item.img} alt={item.title} className="news-img" />
+            {section.news.map((item, idx) => (
+              <div key={idx} className="news-card">
+                <img
+                  src={item.img}
+                  alt={item.title}
+                  className="news-img"
+                  onError={(e) => (e.target.src = fallbackImages[section.name] || fallbackImages.General)}
+                />
                 <div className="news-info">
                   <h3>{item.title}</h3>
                   <p>{item.description}</p>
-                  <div className="like-section">❤️ {item.likes} Likes</div>
+                  <div className="card-footer">
+                    <button className="read-more-btn" onClick={() => window.open(item.url, "_blank")}>
+                      Read More
+                    </button>
+                    <span className="like-section">❤️ {item.likes}</span>
+                  </div>
                 </div>
               </div>
             ))}
@@ -66,3 +80,4 @@ export default function Environment() {
     </div>
   );
 }
+
